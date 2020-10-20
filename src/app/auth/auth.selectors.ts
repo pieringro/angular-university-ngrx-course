@@ -1,7 +1,9 @@
-import {createFeatureSelector, createSelector} from '@ngrx/store'
+import { createFeatureSelector, createSelector } from '@ngrx/store'
 import { AuthState } from './reducers';
 
-export const  selectAuthState = createFeatureSelector<AuthState>("auth");
+// selectors are essentialy queries that we are issuing against the store
+
+export const selectAuthState = createFeatureSelector<AuthState>("auth");
 
 export const isLoggedIn = createSelector(
     selectAuthState,
