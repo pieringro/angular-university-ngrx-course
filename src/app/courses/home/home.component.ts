@@ -42,17 +42,14 @@ export class HomeComponent implements OnInit {
 
     this.beginnerCourses$ = this.store.pipe(
       select(selectBeginnerCourses),
-      tap(whatever => console.log(whatever)),
     )
 
     this.advancedCourses$ = this.store.pipe(
       select(selectAdvanceCourses),
-      tap(whatever => console.log(whatever)),
     );
 
     this.promoTotal$ = this.store.pipe(
       select(selectPromoTotal),
-      tap(whatever => console.log(whatever)),
     );
 
     // const courses$ = this.coursesHttpService.findAllCourses()
