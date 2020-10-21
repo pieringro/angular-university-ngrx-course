@@ -1,4 +1,5 @@
 
+import { Update } from "@ngrx/entity";
 import { createAction, props } from "@ngrx/store";
 import { Course } from "./model/course";
 
@@ -11,5 +12,10 @@ export const allCoursesLoaded = createAction(
     props<{ courses: Course[] }>()
 );
 
+export const courseUpdated = createAction(
+    "[Edit Course Dialog] Course Updated",
+    // Update is a special type, that makes easy to modify data stored in Entity format
+    props<{update: Update<Course>}>() 
+);
 
 
