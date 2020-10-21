@@ -24,19 +24,24 @@ import { RouterModule, Routes } from '@angular/router';
 import { EntityDataService, EntityDefinitionService, EntityMetadataMap } from '@ngrx/data';
 import { compareCourses, Course } from './model/course';
 import { CourseEntityService } from './services/course-entity.service';
-
+import { CoursesResolver } from './services/courses.resolver';
 import { compareLessons, Lesson } from './model/lesson';
-
+import { CoursesDataService } from './services/courses-data.service';
 
 export const coursesRoutes: Routes = [
   {
     path: '',
-    component: HomeComponent
-
+    component: HomeComponent,
+    resolve: {
+      courses: CoursesResolver
+    }
   },
   {
     path: ':courseUrl',
-    component: CourseComponent
+    component: CourseComponent,
+    resolve: {
+      courses: CoursesResolver
+    }
   }
 ];
 
@@ -82,13 +87,22 @@ const entityMetadata: EntityMetadataMap = {
   entryComponents: [EditCourseDialogComponent],
   providers: [
     CoursesHttpService,
-    CourseEntityService
+    CourseEntityService,
+    CoursesResolver,
+    CoursesDataService
   ]
 })
 export class CoursesModule {
 
-  constructor(private eds: EntityDefinitionService) {
+  constructor(
+    private eds: EntityDefinitionService,
+    private entityDataService: EntityDataService,
+    private courseDataService: CoursesDataService
+  ) {
     eds.registerMetadataMap(entityMetadata);
+
+    //register our special data service (our behaviour is different from the default)
+    entityDataService.registerService('Course', courseDataService); 
   }
 
 
