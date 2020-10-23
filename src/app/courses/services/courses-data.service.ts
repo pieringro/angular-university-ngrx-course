@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DefaultDataService, HttpUrlGenerator } from '@ngrx/data';
+import { Update } from '@ngrx/entity';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Course } from '../model/course';
@@ -18,4 +19,18 @@ export class CoursesDataService extends DefaultDataService<Course> {
                 map(res => res["payload"]) //tell ngrx data how to fetch entities
             );
     }
+
+    // update(course: Update<Course>): Observable<Course> {
+    //     return this.http.put('/api/course/' + course.id, course)
+    //         .pipe(
+    //             map(res => {
+    //                 console.log(res);
+    //                 return {
+    //                     course.id,
+    //                     ...course.changes,
+    //                     ...res
+    //                 }
+    //             })
+    //         );
+    // }
 }
