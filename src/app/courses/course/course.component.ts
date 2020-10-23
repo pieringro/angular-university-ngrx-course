@@ -26,6 +26,8 @@ export class CourseComponent implements OnInit {
 
   nextPage = 0;
 
+  noMoreLesson = false;
+
   constructor(
     private coursesService: CourseEntityService,
     private lessonService: LessonEntityService,
@@ -59,14 +61,20 @@ export class CourseComponent implements OnInit {
 
 
   loadLessonsPage(course: Course) {
-    this.lessonService.getWithQuery({
-      'courseId': course.id.toString(),
-      'sortOrder': 'asc',
-      'pageNumber': this.nextPage.toString(),
-      'pageSize': '3',
-    });
+    if (!this.noMoreLesson) {
+      this.lessonService.getWithQuery({
+        'courseId': course.id.toString(),
+        'sortOrder': 'asc',
+        'pageNumber': this.nextPage.toString(),
+        'pageSize': '3',
+      }).subscribe(lesson => {
+        if (lesson.length == 0) {
+          this.noMoreLesson = true;
+        }
+      });
 
-    this.nextPage++;
+      this.nextPage++;
+    }
   }
 
 }
