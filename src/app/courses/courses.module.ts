@@ -48,7 +48,7 @@ export const coursesRoutes: Routes = [
 
 const entityMetadata: EntityMetadataMap = {
   Course: {
-
+    sortComparer: compareCourses
   }
 }
 
@@ -102,7 +102,7 @@ export class CoursesModule {
     eds.registerMetadataMap(entityMetadata);
 
     //register our special data service (our behaviour is different from the default)
-    entityDataService.registerService('Course', courseDataService); 
+    entityDataService.registerService('Course', courseDataService);
   }
 
 
