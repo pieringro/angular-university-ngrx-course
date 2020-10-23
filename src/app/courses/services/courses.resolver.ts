@@ -17,11 +17,11 @@ export class CoursesResolver implements Resolve<boolean>{
             .pipe(
                 tap(loaded => {
                         if (!loaded) {
-                            this.coursesService.getAll();
+                            this.coursesService.getAll(); //trigger http request and auto side effect
                         }
                     }
                 ),
-                filter(loaded => loaded),
+                filter(loaded => !!loaded),
                 first()
             );
     }
