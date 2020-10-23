@@ -20,17 +20,4 @@ export class CoursesDataService extends DefaultDataService<Course> {
             );
     }
 
-    // update(course: Update<Course>): Observable<Course> {
-    //     return this.http.put('/api/course/' + course.id, course)
-    //         .pipe(
-    //             map(res => {
-    //                 console.log(res);
-    //                 return {
-    //                     course.id,
-    //                     ...course.changes,
-    //                     ...res
-    //                 }
-    //             })
-    //         );
-    // }
 }
