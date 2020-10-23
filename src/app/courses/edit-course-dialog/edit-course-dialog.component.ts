@@ -63,9 +63,13 @@ export class EditCourseDialogComponent {
       ...this.form.value
     };
 
-    this.coursesService.update(course);
-    
-    this.dialogRef.close(); //optimistic
+    if (this.mode == 'update') {
+      this.coursesService.update(course);
+  
+      this.dialogRef.close(); //optimistic
+    }
+
+
   }
 
 
